@@ -3,6 +3,7 @@ import {
   collectTemplateValues,
   getLocalizedText,
   validateTemplateConfig,
+  withBaseUrl,
   type DocumentTemplateConfig,
 } from './schema'
 
@@ -87,5 +88,19 @@ describe('template schema validation', () => {
     expect(collectTemplateValues(validSampleConfig, 'default')).toEqual({
       barcode: 'GRZ-0001',
     })
+  })
+
+  it('prefixes root-relative public asset URLs with configured Vite base path', () => {
+    expect(withBaseUrl('/templates/card/front.png', '/')).toBe('/templates/card/front.png')
+    expect(withBaseUrl('/templates/card/front.png', '/inkpass-studio/')).toBe(
+      '/inkpass-studio/templates/card/front.png'
+    )
+    expect(withBaseUrl('/inkpass-studio/templates/card/front.png', '/inkpass-studio/')).toBe(
+      '/inkpass-studio/templates/card/front.png'
+    )
+    expect(withBaseUrl('/templates/card/front.png', './')).toBe('./templates/card/front.png')
+    expect(withBaseUrl('blob:https://example.com/123', '/inkpass-studio/')).toBe(
+      'blob:https://example.com/123'
+    )
   })
 })

@@ -13,7 +13,7 @@ import {
 } from '@/engine/template-zip'
 import type { BundledCardFont } from '@/fonts'
 import { TEMPLATES, getBuiltInTemplateDocs, getTemplateById } from './registry'
-import type { DocumentTemplateConfig, LocalizedText } from './schema'
+import { withBaseUrl, type DocumentTemplateConfig, type LocalizedText } from './schema'
 import { normalizeTemplateDocs, type TemplateDocs } from './template-docs'
 
 export interface ResolvedTemplateEntry {
@@ -55,8 +55,8 @@ export function deduplicateImportedPackage(
   }
 
   const nextId = `${originalId}-${counter}`
-  const oldPrefix = `/templates/${encodeURIComponent(originalId)}/`
-  const nextPrefix = `/templates/${encodeURIComponent(nextId)}/`
+  const oldPrefix = withBaseUrl(`/templates/${encodeURIComponent(originalId)}/`)
+  const nextPrefix = withBaseUrl(`/templates/${encodeURIComponent(nextId)}/`)
 
   const nextAssetOverrides: Record<string, string> = { ...loaded.assetOverrides }
   for (const [key, url] of Object.entries(loaded.assetOverrides)) {

@@ -3,6 +3,7 @@ import { BUNDLED_CARD_FONTS, findBundledFont, type BundledCardFont } from '@/fon
 import {
   resolveTemplateAssetUrl,
   validateTemplateConfig,
+  withBaseUrl,
   type DocumentTemplateConfig,
 } from '@/templates/schema'
 import {
@@ -206,7 +207,7 @@ export async function buildTemplateZip(
     let fileName = localEntry?.fileName ?? decodeURIComponent(getBaseName(fontRecord.url))
 
     if (!fontBlob && fontRecord.url) {
-      fontBlob = await fetchAsset(fontRecord.url)
+      fontBlob = await fetchAsset(withBaseUrl(fontRecord.url))
     }
     if (!fontBlob) continue
 

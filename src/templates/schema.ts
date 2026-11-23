@@ -15,9 +15,45 @@ export function getLocalizedText(text: LocalizedText | undefined, locale: Locale
 }
 
 /**
+ * Returns the app's configured Vite base URL (always ending with `/`, or `./`).
+ */
+export function getAppBaseUrl(): string {
+  const raw =
+    typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL
+      ? import.meta.env.BASE_URL
+      : '/'
+  if (raw === './' || raw === '.') return './'
+  return raw.endsWith('/') ? raw : `${raw}/`
+}
+
+/**
+ * Prefixes root-relative public asset paths (e.g. `/templates/...`) with Vite's `BASE_URL`
+ * so built-in artwork and fonts resolve cleanly on both `/` and GitHub Pages subpaths
+ * like `/inkpass-studio/`.
+ */
+export function withBaseUrl(url: string, baseOverride?: string): string {
+  if (!url) return ''
+  if (
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('data:') ||
+    url.startsWith('blob:')
+  ) {
+    return url
+  }
+  const base = baseOverride ?? getAppBaseUrl()
+  if (url.startsWith('/')) {
+    if (base === '/') return url
+    if (base !== './' && url.startsWith(base)) return url
+    return `${base}${url.slice(1)}`
+  }
+  return url
+}
+
+/**
  * Resolves a template asset path (e.g. "./front.png" or "overlay.svg") relative to
- * `/templates/<templateId>/`. Absolute paths ("/..."), data/blob URLs, and http(s) URLs
- * are returned untouched.
+ * `<base>templates/<templateId>/`. Absolute paths ("/..."), data/blob URLs, and http(s) URLs
+ * are prefixed with base (for root-relative paths) or returned untouched.
  */
 export function resolveTemplateAssetUrl(
   templateId: string,
@@ -25,7 +61,6 @@ export function resolveTemplateAssetUrl(
 ): string {
   if (!assetPath) return ''
   if (
-    assetPath.startsWith('/') ||
     assetPath.startsWith('http://') ||
     assetPath.startsWith('https://') ||
     assetPath.startsWith('data:') ||
@@ -33,8 +68,11 @@ export function resolveTemplateAssetUrl(
   ) {
     return assetPath
   }
+  if (assetPath.startsWith('/')) {
+    return withBaseUrl(assetPath)
+  }
   const cleaned = assetPath.replace(/^\.\//, '')
-  return `/templates/${encodeURIComponent(templateId)}/${cleaned}`
+  return withBaseUrl(`/templates/${encodeURIComponent(templateId)}/${cleaned}`)
 }
 
 export interface TemplateFont {

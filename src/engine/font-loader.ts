@@ -1,4 +1,4 @@
-import type { TemplateFont } from '@/templates/schema'
+import { withBaseUrl, type TemplateFont } from '@/templates/schema'
 
 const loadedFontKeys = new Set<string>()
 
@@ -16,7 +16,7 @@ export async function loadTemplateFonts(
 
   await Promise.all(
     fonts.map(async (font) => {
-      const resolvedUrl = assetOverrides?.[font.url] ?? font.url
+      const resolvedUrl = withBaseUrl(assetOverrides?.[font.url] ?? font.url)
       const key = `${font.family}::${resolvedUrl}::${font.weight ?? 'normal'}::${font.style ?? 'normal'}`
       if (loadedFontKeys.has(key)) return
 
