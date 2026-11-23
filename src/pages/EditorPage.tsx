@@ -195,11 +195,11 @@ export function EditorPage({ templateId }: EditorPageProps) {
           </div>
         )}
 
-        {/* Split-screen Studio: Preview sticky on right (top on mobile), Form on left */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
-          {/* Preview & Export column (first on mobile, sticky right on desktop) */}
-          <div className="space-y-5 lg:sticky lg:top-20 lg:order-2 lg:col-span-6">
-            <div className="space-y-2">
+        {/* Split-screen Studio: Preview -> Form -> Export on mobile; Form left + sticky Preview/Export right on desktop */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start lg:gap-8">
+          {/* Preview & Export column (dissolved via `contents` on mobile so Form sits between them) */}
+          <div className="contents lg:sticky lg:top-20 lg:order-2 lg:col-span-6 lg:block lg:space-y-5">
+            <div className="order-1 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-extrabold tracking-wider text-chaos-black/65 uppercase">
                   {t('editor.previewTitle')} — {getLocalizedText(activeSide.label, locale)}
@@ -223,23 +223,25 @@ export function EditorPage({ templateId }: EditorPageProps) {
               />
             </div>
 
-            <ExportPanel
-              template={template}
-              activeSide={activeSide}
-              values={values}
-              exportMode={exportMode}
-              onExportModeChange={setExportMode}
-              exportBleedMm={previewBleed.exportBleedMm}
-              onExportBleedMmChange={setExportBleedMm}
-              selectedFont={selectedFont}
-              onSelectedFontChange={setSelectedFont}
-              assetOverrides={entry?.assetOverrides}
-              extraFonts={entry?.extraFonts}
-            />
+            <div className="order-3">
+              <ExportPanel
+                template={template}
+                activeSide={activeSide}
+                values={values}
+                exportMode={exportMode}
+                onExportModeChange={setExportMode}
+                exportBleedMm={previewBleed.exportBleedMm}
+                onExportBleedMmChange={setExportBleedMm}
+                selectedFont={selectedFont}
+                onSelectedFontChange={setSelectedFont}
+                assetOverrides={entry?.assetOverrides}
+                extraFonts={entry?.extraFonts}
+              />
+            </div>
           </div>
 
           {/* Dynamic Form column */}
-          <div className="rounded-xl border-3 border-chaos-black bg-[#f5f0e8] p-5 shadow-[4px_4px_0px_#0d0d0d] lg:order-1 lg:col-span-6">
+          <div className="order-2 rounded-xl border-3 border-chaos-black bg-[#f5f0e8] p-5 shadow-[4px_4px_0px_#0d0d0d] lg:order-1 lg:col-span-6">
             <DynamicForm
               template={template}
               side={activeSide}
