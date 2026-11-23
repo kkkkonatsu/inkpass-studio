@@ -1,0 +1,288 @@
+{
+  "id": "inkblot-student-id",
+  "category": "id-card",
+  "organization": {
+    "en": "Inkblot Art Academy",
+    "ja": "海女美術大学",
+    "zh-Hans": "海女美术大学",
+    "zh-Hant": "海女美術大學"
+  },
+  "name": {
+    "en": "Student ID",
+    "ja": "学生証明書",
+    "zh-Hans": "学生证",
+    "zh-Hant": "學生證"
+  },
+  "description": {
+    "en": "Inkblot Art Academy student ID.",
+    "ja": "海女美術大学の学生証明書。",
+    "zh-Hans": "海女美术大学学生证。",
+    "zh-Hant": "海女美術大學學生證。"
+  },
+  "themeAccent": "blue",
+  "canvasSize": {
+    "width": 4233,
+    "height": 2739
+  },
+  "physicalSizeMm": {
+    "width": 85.6,
+    "height": 53.98
+  },
+  "fonts": [],
+  "defaultFontFamily": "'Hiragino Sans', 'Noto Sans JP', 'Montserrat', sans-serif",
+  "sides": [
+    {
+      "id": "front",
+      "label": {
+        "en": "Front",
+        "ja": "表面",
+        "zh-Hans": "正面",
+        "zh-Hant": "正面"
+      },
+      "backgroundColor": "#f5f0e8",
+      "fields": [
+        {
+          "id": "photo",
+          "type": "photo",
+          "label": {
+            "en": "Student Photo",
+            "ja": "証明写真",
+            "zh-Hans": "证件照",
+            "zh-Hant": "證件照"
+          },
+          "x": 2675,
+          "y": 778,
+          "width": 1265,
+          "height": 1684,
+          "borderRadius": 0,
+          "fit": "cover",
+          "placeholderLabel": "PHOTO",
+          "sampleValue": ""
+        },
+        {
+          "id": "studentId",
+          "type": "text",
+          "label": {
+            "en": "Student ID Number",
+            "ja": "学籍番号",
+            "zh-Hans": "学籍编号",
+            "zh-Hant": "學籍編號"
+          },
+          "x": 929,
+          "y": 750,
+          "width": 1666,
+          "height": 155,
+          "fontSize": 110,
+          "minFontSize": 14,
+          "fontWeight": "700",
+          "color": "#0d0d0d",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "SW-0000-0000-0000",
+          "scaleX": 75,
+          "letterSpacing": -2.5,
+          "randomPattern": "@@-####-####-####"
+        },
+        {
+          "id": "department",
+          "type": "text",
+          "label": {
+            "en": "Faculty / Department",
+            "ja": "学部・学科",
+            "zh-Hans": "学院 / 系",
+            "zh-Hant": "學院 / 學系"
+          },
+          "x": 929,
+          "y": 921,
+          "width": 1666,
+          "height": 155,
+          "fontSize": 110,
+          "minFontSize": 14,
+          "fontWeight": "700",
+          "color": "#0d0d0d",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "美術学部　美術学科",
+          "letterSpacing": 13.5
+        },
+        {
+          "id": "major",
+          "type": "text",
+          "label": {
+            "en": "Major",
+            "ja": "専攻",
+            "zh-Hans": "专业",
+            "zh-Hant": "主修"
+          },
+          "x": 929,
+          "y": 1050,
+          "width": 1666,
+          "height": 155,
+          "fontSize": 110,
+          "minFontSize": 14,
+          "fontWeight": "700",
+          "color": "#0d0d0d",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "美術史専攻",
+          "letterSpacing": 13.5
+        },
+        {
+          "id": "name",
+          "type": "text",
+          "label": {
+            "en": "Full Name",
+            "ja": "氏名",
+            "zh-Hans": "姓名",
+            "zh-Hant": "姓名"
+          },
+          "x": 929,
+          "y": 1228,
+          "width": 1666,
+          "height": 155,
+          "fontSize": 110,
+          "minFontSize": 14,
+          "fontWeight": "700",
+          "color": "#0d0d0d",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "鱓",
+          "letterSpacing": 13.5
+        },
+        {
+          "id": "nameKatakana",
+          "type": "text",
+          "label": {
+            "en": "Name (Katakana)",
+            "ja": "氏名（カタカナ）",
+            "zh-Hans": "姓名（片假名）",
+            "zh-Hant": "姓名（片假名）"
+          },
+          "x": 929,
+          "y": 1355,
+          "width": 1666,
+          "height": 155,
+          "fontSize": 110,
+          "minFontSize": 14,
+          "fontWeight": "700",
+          "color": "#0d0d0d",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "ウツホ",
+          "letterSpacing": 13.5
+        },
+        {
+          "id": "splashtag_title",
+          "type": "splashtag-title",
+          "label": {
+            "en": "Splashtag Title",
+            "ja": "二つ名",
+            "zh-Hans": "铭牌称号",
+            "zh-Hant": "名牌稱號"
+          },
+          "x": 929,
+          "y": 1534,
+          "width": 1666,
+          "height": 155,
+          "fontSize": 110,
+          "minFontSize": 14,
+          "fontWeight": "700",
+          "color": "#0d0d0d",
+          "align": "left",
+          "verticalAlign": "middle",
+          "presetId": "splashtag-titles",
+          "joiner": "",
+          "allowCustom": true,
+          "sampleValue": "踊る ギャングスター",
+          "letterSpacing": 13.5
+        },
+        {
+          "id": "dateOfBirth",
+          "type": "date",
+          "label": {
+            "en": "Date of Birth",
+            "ja": "生年月日",
+            "zh-Hans": "出生年月日",
+            "zh-Hant": "出生年月日"
+          },
+          "x": 929,
+          "y": 1702,
+          "width": 1666,
+          "height": 155,
+          "fontSize": 110,
+          "minFontSize": 14,
+          "fontWeight": "700",
+          "color": "#0d0d0d",
+          "align": "left",
+          "verticalAlign": "middle",
+          "format": "GGGEEE年M月D日",
+          "calendar": "japanese-era",
+          "sampleValue": "2000-09-09",
+          "letterSpacing": 13.5,
+          "fullWidth": true
+        }
+      ],
+      "background": "./front.png",
+      "overlay": "./overlay.png"
+    },
+    {
+      "id": "back",
+      "label": {
+        "en": "Side 2",
+        "ja": "面 2",
+        "zh-Hans": "第 2 面",
+        "zh-Hant": "第 2 面"
+      },
+      "backgroundColor": "#f5f0e8",
+      "fields": [
+        {
+          "id": "barcode",
+          "type": "barcode",
+          "label": {
+            "en": "Barcode",
+            "ja": "バーコード",
+            "zh-Hans": "条形码",
+            "zh-Hant": "條碼"
+          },
+          "x": 277,
+          "y": 2183,
+          "width": 1903,
+          "height": 199,
+          "format": "CODE128",
+          "lineColor": "#0d0d0d",
+          "backgroundColor": "transparent",
+          "displayValue": false,
+          "sampleValue": "SW-0000-0000-0000"
+        },
+        {
+          "id": "studentIdBack",
+          "type": "text",
+          "label": {
+            "en": "Text Field",
+            "ja": "学籍番号",
+            "zh-Hans": "学籍编号",
+            "zh-Hant": "學籍編號"
+          },
+          "x": 290,
+          "y": 2382,
+          "width": 1694,
+          "height": 126,
+          "fontSize": 84,
+          "minFontSize": 14,
+          "fontWeight": "700",
+          "color": "#0d0d0d",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "SW-0000-0000-0000",
+          "scaleX": 75,
+          "letterSpacing": -3,
+          "randomPattern": "@@-####-####-####"
+        }
+      ],
+      "background": "./back.png"
+    }
+  ],
+  "thumbnail": "./custom-card-front.png",
+  "defaultFontId": "wapuro-mincho",
+  "bleedMm": 2
+}

@@ -1,0 +1,258 @@
+{
+  "id": "grizzco-staff-id",
+  "order": 2,
+  "category": "id-card",
+  "organization": {
+    "en": "Grizzco Industries",
+    "ja": "クマサン商会",
+    "zh-Hans": "熊先生商会",
+    "zh-Hant": "熊先生商會"
+  },
+  "name": {
+    "en": "Staff ID",
+    "ja": "社員証",
+    "zh-Hans": "员工证",
+    "zh-Hant": "職員證"
+  },
+  "description": {
+    "en": "Grizzco Industries staff badge.",
+    "ja": "クマサン商会の社員証。",
+    "zh-Hans": "熊先生商会员工证。",
+    "zh-Hant": "熊先生商會職員證。"
+  },
+  "themeAccent": "orange",
+  "thumbnail": "./grizzco-staff-id-2-front.png",
+  "canvasSize": {
+    "width": 4233,
+    "height": 2739
+  },
+  "physicalSizeMm": {
+    "width": 85.6,
+    "height": 53.98
+  },
+  "fonts": [],
+  "defaultFontId": "source-han-serif-jp-heavy",
+  "defaultFontFamily": "'Hiragino Sans', 'Noto Sans JP', 'PingFang SC', 'Montserrat', sans-serif",
+  "sides": [
+    {
+      "id": "front",
+      "label": {
+        "en": "Front",
+        "ja": "表面",
+        "zh-Hans": "正面",
+        "zh-Hant": "正面"
+      },
+      "background": "./front.png",
+      "backgroundColor": "#f6efe4",
+      "fields": [
+        {
+          "id": "photo",
+          "type": "photo",
+          "label": {
+            "en": "Staff Photo",
+            "ja": "顔写真",
+            "zh-Hans": "员工证件照",
+            "zh-Hant": "職員證件照"
+          },
+          "x": 295,
+          "y": 316,
+          "width": 1292,
+          "height": 1697,
+          "borderRadius": 0,
+          "fit": "cover",
+          "placeholderLabel": "PHOTO"
+        },
+        {
+          "id": "name",
+          "type": "text",
+          "label": {
+            "en": "Staff Name",
+            "ja": "氏名",
+            "zh-Hans": "姓名",
+            "zh-Hant": "姓名"
+          },
+          "placeholder": {
+            "en": "e.g. シャケ バイト",
+            "ja": "例: シャケ バイト",
+            "zh-Hans": "例：シャケ バイト",
+            "zh-Hant": "例：シャケ バイト"
+          },
+          "x": 2371,
+          "y": 977,
+          "width": 1717,
+          "height": 266,
+          "fontSize": 281,
+          "minFontSize": 84,
+          "fontWeight": "900",
+          "color": "#feffff",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "鱶",
+          "letterSpacing": 46.06
+        },
+        {
+          "id": "nameKatakana",
+          "type": "text",
+          "label": {
+            "en": "Staff Name (Katakana)",
+            "ja": "氏名（カタカナ）",
+            "zh-Hans": "姓名（片假名）",
+            "zh-Hant": "姓名（片假名）"
+          },
+          "x": 2371,
+          "y": 1198,
+          "width": 1717,
+          "height": 206,
+          "fontSize": 117,
+          "minFontSize": 59,
+          "fontWeight": "700",
+          "color": "#feffff",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "フウカ",
+          "letterSpacing": 3.28
+        },
+        {
+          "id": "affiliation",
+          "type": "text",
+          "label": {
+            "en": "Affiliation",
+            "ja": "所属",
+            "zh-Hans": "所属部门",
+            "zh-Hant": "所屬部門"
+          },
+          "x": 2374,
+          "y": 1404,
+          "width": 1717,
+          "height": 206,
+          "fontSize": 117,
+          "minFontSize": 59,
+          "fontWeight": "700",
+          "color": "#feffff",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "現場作業部　イクラ収集課",
+          "letterSpacing": 12.06,
+          "multiline": false
+        },
+        {
+          "id": "salmonRank",
+          "type": "select-or-custom",
+          "label": {
+            "en": "Salmon Run Title (称号)",
+            "ja": "サーモンラン称号",
+            "zh-Hans": "打工称号（称号）",
+            "zh-Hant": "打工稱號（称号）"
+          },
+          "x": 2374,
+          "y": 1614,
+          "width": 1717,
+          "height": 206,
+          "fontSize": 117,
+          "minFontSize": 67,
+          "fontWeight": "700",
+          "color": "#feffff",
+          "align": "left",
+          "verticalAlign": "middle",
+          "presetId": "salmon-run-ranks",
+          "allowCustom": true,
+          "sampleValue": "たつじん+3",
+          "letterSpacing": 12.06
+        },
+        {
+          "id": "expireDate",
+          "type": "date",
+          "label": {
+            "en": "Expire Date",
+            "ja": "有効期限",
+            "zh-Hans": "有效期限",
+            "zh-Hant": "有效期限"
+          },
+          "x": 2374,
+          "y": 1816,
+          "width": 1717,
+          "height": 210,
+          "fontSize": 117,
+          "minFontSize": 63,
+          "fontWeight": "700",
+          "color": "#feffff",
+          "align": "left",
+          "verticalAlign": "middle",
+          "format": "YYYY年MM月DD日",
+          "calendar": "gregorian",
+          "sampleValue": "2036-08-31",
+          "letterSpacing": 19.84,
+          "multiline": false
+        },
+        {
+          "id": "employeeId",
+          "type": "text",
+          "label": {
+            "en": "Employee ID",
+            "ja": "社員番号",
+            "zh-Hans": "员工编号",
+            "zh-Hant": "職員編號"
+          },
+          "placeholder": {
+            "en": "e.g. GRZ-0777-SR",
+            "ja": "例: GRZ-0777-SR",
+            "zh-Hans": "例：GRZ-0777-SR",
+            "zh-Hant": "例：GRZ-0777-SR"
+          },
+          "x": 1151,
+          "y": 2134,
+          "width": 2922,
+          "height": 240,
+          "fontSize": 188,
+          "minFontSize": 67,
+          "fontWeight": "800",
+          "color": "#feffff",
+          "align": "left",
+          "verticalAlign": "middle",
+          "letterSpacing": 18.84,
+          "randomPattern": "@@-####-####-####",
+          "sampleValue": "SW-0000-0000-0000"
+        }
+      ],
+      "overlay": "./overlay.png"
+    },
+    {
+      "id": "back",
+      "label": {
+        "en": "Side 2",
+        "ja": "面 2",
+        "zh-Hans": "第 2 面",
+        "zh-Hant": "第 2 面"
+      },
+      "background": "./back.png",
+      "backgroundColor": "#f5f0e8",
+      "fields": [
+        {
+          "id": "employeeIdBack",
+          "type": "text",
+          "label": {
+            "en": "Employee ID",
+            "ja": "社員番号",
+            "zh-Hans": "员工编号",
+            "zh-Hant": "職員編號"
+          },
+          "x": 2525,
+          "y": 2432,
+          "width": 1708,
+          "height": 206,
+          "fontSize": 138,
+          "minFontSize": 59,
+          "fontWeight": "600",
+          "color": "#feffff",
+          "align": "left",
+          "verticalAlign": "middle",
+          "sampleValue": "SW-0000-0000-0000",
+          "randomPattern": "@@-####-####-####",
+          "fontId": "cmunvt",
+          "letterSpacing": 13.65
+        }
+      ]
+    }
+  ],
+  "bleedMm": 2
+}

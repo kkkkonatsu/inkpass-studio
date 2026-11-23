@@ -1,0 +1,9 @@
+# Dependencies & build output
+node_modules/
+dist/
+.DS_Store
+
+# Auto-synced from node_modules/splatoon-ui/public on npm install
+public/_images/
+public/fonts/
+public/svgs/

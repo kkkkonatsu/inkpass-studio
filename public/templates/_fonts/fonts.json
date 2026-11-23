@@ -1,0 +1,17 @@
+{
+  "wapuro-mincho.otf": {
+    "id": "wapuro-mincho",
+    "label": "ワープロ明朝 (Wapuro Mincho)",
+    "family": "WapuroMincho"
+  },
+  "SourceHanSerifJP-Heavy.otf": {
+    "id": "source-han-serif-jp-heavy",
+    "label": "源ノ明朝 (Source Han Serif JP Heavy)",
+    "family": "SourceHanSerifJPHeavy"
+  },
+  "cmunvt.otf": {
+    "id": "cmunvt",
+    "label": "CMU Typewriter Variable (cmunvt)",
+    "family": "CMUTypewriterVariable"
+  }
+}

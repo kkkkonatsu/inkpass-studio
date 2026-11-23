@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cmunvt",
+    "family": "CMUTypewriterVariable",
+    "label": "CMU Typewriter Variable (cmunvt)",
+    "url": "/templates/_fonts/cmunvt.otf"
+  },
+  {
+    "id": "source-han-serif-jp-heavy",
+    "family": "SourceHanSerifJPHeavy",
+    "label": "源ノ明朝 (Source Han Serif JP Heavy)",
+    "url": "/templates/_fonts/SourceHanSerifJP-Heavy.otf"
+  },
+  {
+    "id": "wapuro-mincho",
+    "family": "WapuroMincho",
+    "label": "ワープロ明朝 (Wapuro Mincho)",
+    "url": "/templates/_fonts/wapuro-mincho.otf"
+  }
+]

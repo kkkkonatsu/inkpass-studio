@@ -1,0 +1,79 @@
+{
+  "id": "salmon-run-ranks",
+  "language": "ja",
+  "source": "https://github.com/Leanny/splat3 (CommonMsg/Coop/CoopGrade)",
+  "options": [
+    {
+      "value": "かけだし",
+      "label": {
+        "en": "Apprentice",
+        "zh-Hans": "新手",
+        "zh-Hant": "新手"
+      }
+    },
+    {
+      "value": "はんにんまえ",
+      "label": {
+        "en": "Part-Timer",
+        "zh-Hans": "半吊子",
+        "zh-Hant": "半吊子"
+      }
+    },
+    {
+      "value": "いちにんまえ",
+      "label": {
+        "en": "Go-Getter",
+        "zh-Hans": "独当一面",
+        "zh-Hant": "獨當一面"
+      }
+    },
+    {
+      "value": "じゅくれん",
+      "label": {
+        "en": "Overachiever",
+        "zh-Hans": "熟练",
+        "zh-Hant": "熟練"
+      }
+    },
+    {
+      "value": "たつじん",
+      "label": {
+        "en": "Profreshional",
+        "zh-Hans": "达人",
+        "zh-Hant": "達人"
+      }
+    },
+    {
+      "value": "たつじん＋１",
+      "label": {
+        "en": "Profreshional +1",
+        "zh-Hans": "达人+1",
+        "zh-Hant": "達人+1"
+      }
+    },
+    {
+      "value": "たつじん＋２",
+      "label": {
+        "en": "Profreshional +2",
+        "zh-Hans": "达人+2",
+        "zh-Hant": "達人+2"
+      }
+    },
+    {
+      "value": "たつじん＋３",
+      "label": {
+        "en": "Profreshional +3",
+        "zh-Hans": "达人+3",
+        "zh-Hant": "達人+3"
+      }
+    },
+    {
+      "value": "でんせつ",
+      "label": {
+        "en": "Eggsecutive VP",
+        "zh-Hans": "传说",
+        "zh-Hant": "傳說"
+      }
+    }
+  ]
+}
