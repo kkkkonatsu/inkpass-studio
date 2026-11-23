@@ -2,6 +2,7 @@
 
 A 100% client-side, config-driven React web app for generating fictional *Splatoon 3* ID cards—including the **Inkblot Art Academy Student ID (海女美術大学 学生証明書)** and **Grizzco Industries Staff ID (クマサン商会 社員証)**—styled with [`splatoon-ui`](https://github.com/YoungSx/splatoon-ui) and hosted statically on GitHub Pages.
 
+- **Live Site:** [inkpass.wenky.net](https://inkpass.wenky.net) · [kkkkonatsu.github.io/inkpass-studio](https://kkkkonatsu.github.io/inkpass-studio)
 - **Repository:** [github.com/kkkkonatsu/inkpass-studio](https://github.com/kkkkonatsu/inkpass-studio)
 
 > **Disclaimer:** Non-commercial fan-made project. Not affiliated with, authorized by, or endorsed by Nintendo Co., Ltd. *Splatoon* and all related names and motifs are trademarks or property of Nintendo Co., Ltd. All generated documents are fictional props. Individual templates belong to their respective authors and remain subject to their own licenses.
