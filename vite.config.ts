@@ -6,15 +6,15 @@ import { defineConfig, type Plugin } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-function resolveBasePath(command: 'build' | 'serve'): string {
+function resolveBasePath(): string {
   const raw = process.env.VITE_BASE_PATH?.trim()
   if (raw) {
     if (raw === './' || raw === '.') return './'
     const withLeading = raw.startsWith('/') ? raw : `/${raw}`
     return withLeading.endsWith('/') ? withLeading : `${withLeading}/`
   }
-  // Relative base in builds works on GitHub Pages subpaths (/inkpass-studio/) AND custom domains
-  return command === 'build' ? './' : '/'
+  // Default to '/' (Cloudflare Pages, custom domains, local dev); GitHub Actions passes VITE_BASE_PATH.
+  return '/'
 }
 
 /**
@@ -47,8 +47,8 @@ function rewriteSplatoonAssetBase(base: string): Plugin {
   }
 }
 
-export default defineConfig(({ command }) => {
-  const base = resolveBasePath(command)
+export default defineConfig(() => {
+  const base = resolveBasePath()
   return {
     base,
     plugins: [react(), tailwindcss(), rewriteSplatoonAssetBase(base)],
