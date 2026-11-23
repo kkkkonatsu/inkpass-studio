@@ -38,8 +38,8 @@ function rewriteSplatoonAssetBase(base: string): Plugin {
           )
         } else if (output.type === 'chunk' && output.fileName.endsWith('.js')) {
           output.code = output.code.replace(
-            /(['"])\/(_images|fonts|svgs)\//g,
-            `$1${jsPrefix}$2/`
+            /(['"`])\/(_images|fonts|svgs)(?=\/|['"`])/g,
+            `$1${jsPrefix}$2`
           )
         }
       }
