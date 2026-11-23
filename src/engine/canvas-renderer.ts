@@ -75,6 +75,47 @@ function buildFontString(
   return `${fontWeight ?? '600'} ${fontSize}px ${fontFamily}`
 }
 
+const graphemeSegmenter: Intl.Segmenter | null =
+  typeof Intl !== 'undefined' && typeof Intl.Segmenter === 'function'
+    ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+    : null
+
+function splitGraphemes(text: string): string[] {
+  if (!text) return []
+  if (graphemeSegmenter) {
+    return Array.from(graphemeSegmenter.segment(text), (part) => part.segment)
+  }
+  return Array.from(text)
+}
+
+/**
+ * Computes the vertical offset from a desired visual center `y` down to the font's
+ * `alphabetic` baseline.
+ *
+ * Unlike `ctx.textBaseline = 'middle'` (where Chrome/Safari use `hhea` while Firefox uses
+ * `OS/2 sTypo`, causing noticeable vertical drift on CJK fonts like Source Han Serif),
+ * anchoring to `alphabetic` with fixed `'H'` glyph bounds renders identically across
+ * Firefox, Chrome, and Safari without jumping vertically as users type.
+ */
+function measureAlphabeticCenterOffset(
+  ctx: CanvasRenderingContext2D,
+  fontSize: number
+): number {
+  const prevBaseline = ctx.textBaseline
+  ctx.textBaseline = 'alphabetic'
+  const metrics = ctx.measureText('H')
+  ctx.textBaseline = prevBaseline
+
+  if (
+    typeof metrics.actualBoundingBoxAscent === 'number' &&
+    typeof metrics.actualBoundingBoxDescent === 'number' &&
+    metrics.actualBoundingBoxAscent > 0
+  ) {
+    return (metrics.actualBoundingBoxAscent - metrics.actualBoundingBoxDescent) / 2
+  }
+  return fontSize * 0.37
+}
+
 function drawRoundedRectPath(
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -206,18 +247,55 @@ function drawTextField(
   const skewX = Math.max(-45, Math.min(45, field.skewX ?? 0))
   const skewFactor = skewX !== 0 ? -Math.tan((skewX * Math.PI) / 180) : 0
 
-  const measureWidth = (sample: string, size: number) => {
-    ctx.font = buildFontString(size, field.fontWeight, fontFamily)
-    const base = ctx.measureText(sample).width
-    const unscaled = letterSpacing
-      ? base + Math.max(0, Array.from(sample).length - 1) * letterSpacing
-      : base
-    return unscaled * scaleX
+  const measureUnscaledWidth = (sample: string): number => {
+    if (!letterSpacing) {
+      return ctx.measureText(sample).width
+    }
+    const chars = splitGraphemes(sample)
+    if (chars.length === 0) return 0
+    let total = 0
+    for (const ch of chars) {
+      total += ctx.measureText(ch).width
+    }
+    return total + Math.max(0, chars.length - 1) * letterSpacing
   }
 
-  const drawScaledLine = (line: string, x: number, y: number) => {
-    if (scaleX === 1 && scaleY === 1 && skewFactor === 0) {
+  const measureWidth = (sample: string, size: number) => {
+    ctx.font = buildFontString(size, field.fontWeight, fontFamily)
+    return measureUnscaledWidth(sample) * scaleX
+  }
+
+  const fillLine = (line: string, x: number, y: number) => {
+    if (!letterSpacing) {
       ctx.fillText(line, x, y)
+      return
+    }
+    const chars = splitGraphemes(line)
+    if (chars.length === 0) return
+
+    const widths = chars.map((ch) => ctx.measureText(ch).width)
+    const totalWidth =
+      widths.reduce((sum, w) => sum + w, 0) + Math.max(0, chars.length - 1) * letterSpacing
+
+    let cursorX = x
+    if (align === 'center') {
+      cursorX = x - totalWidth / 2
+    } else if (align === 'right') {
+      cursorX = x - totalWidth
+    }
+
+    const prevAlign = ctx.textAlign
+    ctx.textAlign = 'left'
+    for (let i = 0; i < chars.length; i += 1) {
+      ctx.fillText(chars[i], cursorX, y)
+      cursorX += widths[i] + letterSpacing
+    }
+    ctx.textAlign = prevAlign
+  }
+
+  const drawScaledLine = (line: string, x: number, y: number, baselineOffset: number) => {
+    if (scaleX === 1 && scaleY === 1 && skewFactor === 0) {
+      fillLine(line, x, y + baselineOffset)
       return
     }
     ctx.save()
@@ -228,7 +306,7 @@ function drawTextField(
     if (scaleX !== 1 || scaleY !== 1) {
       ctx.scale(scaleX, scaleY)
     }
-    ctx.fillText(line, 0, 0)
+    fillLine(line, 0, baselineOffset)
     ctx.restore()
   }
 
@@ -236,12 +314,7 @@ function drawTextField(
     ctx.save()
     ctx.fillStyle = field.color
     ctx.textAlign = align
-    ctx.textBaseline = 'middle'
-
-    if ('letterSpacing' in ctx && letterSpacing) {
-      ;(ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing =
-        `${letterSpacing}px`
-    }
+    ctx.textBaseline = 'alphabetic'
 
     const drawX =
       align === 'center'
@@ -264,8 +337,9 @@ function drawTextField(
       }
 
       ctx.font = buildFontString(fontSize, field.fontWeight, fontFamily)
+      const baselineOffset = measureAlphabeticCenterOffset(ctx, fontSize)
       lines.forEach((line, index) => {
-        drawScaledLine(line, drawX, startY + index * lineHeightPx)
+        drawScaledLine(line, drawX, startY + index * lineHeightPx, baselineOffset)
       })
     } else {
       const fittedSize = computeFittedFontSize(
@@ -285,7 +359,8 @@ function drawTextField(
       }
 
       ctx.font = buildFontString(fittedSize, field.fontWeight, fontFamily)
-      drawScaledLine(formatted, drawX, drawY)
+      const baselineOffset = measureAlphabeticCenterOffset(ctx, fittedSize)
+      drawScaledLine(formatted, drawX, drawY, baselineOffset)
     }
 
     ctx.restore()

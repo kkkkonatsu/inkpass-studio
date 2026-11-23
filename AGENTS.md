@@ -42,7 +42,9 @@ npm run build       # sync-card-fonts + tsc --noEmit + vite build
    - **Standardized upload filenames:** Uploaded artwork is named `./<side-id>.<ext>`, `./<side-id>-overlay.<ext>`, and `./thumb.<ext>` via `buildStandardImagePath`, pruning unreferenced old blobs from `localImages`.
    - **Undo/Redo & Shortcuts:** 50-step history stack with 450ms coalescing for drags/nudges; global shortcuts pause when focus is inside `INPUT`/`TEXTAREA`/`SELECT`/`contentEditable` or when a modal is open. Keep `DesignerShortcutsModal.tsx` in sync if adding shortcuts.
 
-5. **Print bleed & trim guides**
+5. **Canvas text rendering (vertical alignment & letter spacing) & print bleed**
+   - `drawTextField` in `src/engine/canvas-renderer.ts` uses `ctx.textBaseline = 'alphabetic'` + `measureAlphabeticCenterOffset` (measured on `'H'`) instead of `textBaseline = 'middle'` so CJK fonts with differing `hhea` vs `OS/2 sTypo` metrics (like `SourceHanSerifJP-Heavy.otf`) render identically across Firefox, Chrome, and Safari.
+   - `drawTextField` renders non-zero `letterSpacing` manually grapheme-by-grapheme (via `Intl.Segmenter`) instead of `ctx.letterSpacing`, because Safari doesn't support `ctx.letterSpacing` and setting it before `measureText` double-counted spacing during auto-fit.
    - `EditorPage.tsx` defaults `exportBleedMm` to `0`.
    - `LiveCardPreview` passes `showTrimGuide={previewBleed.exportBleedMm > 0}` so the dashed cyan trim line appears only when bleed is active and is never baked into downloaded PNG/PDF exports.
 
