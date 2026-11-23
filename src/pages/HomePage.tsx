@@ -12,6 +12,7 @@ import {
 } from 'splatoon-ui/dialog'
 import { DottedDivider } from 'splatoon-ui/dotted-divider'
 import { HeadingTape } from 'splatoon-ui/heading-tape'
+import { Loader } from 'splatoon-ui/loader'
 import { Section } from 'splatoon-ui/section'
 import { TapeTitle } from 'splatoon-ui/tape-title'
 import { TornCard, TornCardDescription, TornCardTitle } from 'splatoon-ui/torn-card'
@@ -62,6 +63,18 @@ function TemplateCard({
       entry.assetOverrides?.[resolveTemplateAssetUrl(template.id, rawThumb)] ??
       resolveTemplateAssetUrl(template.id, rawThumb)
     : ''
+  const imgRef = React.useRef<HTMLImageElement | null>(null)
+  const [thumbStatus, setThumbStatus] = React.useState<'loading' | 'loaded' | 'error'>('loading')
+
+  React.useEffect(() => {
+    if (!resolvedThumb) return
+    const img = imgRef.current
+    if (img && img.complete) {
+      setThumbStatus(img.naturalWidth > 0 ? 'loaded' : 'error')
+    } else {
+      setThumbStatus('loading')
+    }
+  }, [resolvedThumb])
 
   return (
     <TornCard
@@ -84,11 +97,21 @@ function TemplateCard({
 
         <div className="w-full space-y-3">
           {resolvedThumb && (
-            <div className="overflow-hidden rounded-lg border-2 border-chaos-black/15 bg-white shadow-sm">
+            <div className="relative aspect-[1011/638] overflow-hidden rounded-lg border-2 border-chaos-black/15 bg-white shadow-sm">
+              {thumbStatus === 'loading' && (
+                <div className="absolute inset-0 flex items-center justify-center bg-[#f5f0e8]/65">
+                  <Loader variant="blue" size="2.25rem" />
+                </div>
+              )}
               <img
+                ref={imgRef}
                 src={resolvedThumb}
                 alt={getLocalizedText(template.name, locale)}
-                className="aspect-[1011/638] w-full object-cover"
+                onLoad={() => setThumbStatus('loaded')}
+                onError={() => setThumbStatus('error')}
+                className={`h-full w-full object-cover transition-opacity duration-200 ${
+                  thumbStatus === 'loaded' ? 'opacity-100' : 'opacity-0'
+                }`}
               />
             </div>
           )}
