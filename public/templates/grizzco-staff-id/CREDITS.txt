@@ -3,7 +3,7 @@ Artwork: 槐
 Fonts Used:
 - Source Han Sans 
 - Source Han Serif 
-- Wapuro Mincho 
+- CMU Typewriter Variable 
 
 Links:
 - https://github.com/kkkkonatsu/inkpass-studio

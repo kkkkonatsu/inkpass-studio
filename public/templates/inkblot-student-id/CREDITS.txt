@@ -2,7 +2,6 @@ Template Author: 小夏
 Artwork: 槐
 Fonts Used:
 - Source Han Sans 
-- Source Han Serif 
 - Wapuro Mincho 
 
 Links:
